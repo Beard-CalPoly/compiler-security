@@ -17,9 +17,16 @@ smash_ex.exe: smash_ex.c
 	$(CLANG) -no-pie smash_ex.ll -o $@
 
 smash_ex.stack-protect.exe: smash_ex.c
-	$(CLANG) -O1 -fstack-protector-strong -S -emit-llvm $< -o smash_ex.stack-protect.ll
+	$(CLANG) -O1 -fstack-protector -S -emit-llvm $< -o smash_ex.stack-protect.ll
 	$(CLANG) -S smash_ex.stack-protect.ll
 	$(CLANG) -no-pie smash_ex.stack-protect.ll -o $@
+
+smash_ex.stack-protect-strong.exe: smash_ex.c
+	$(CLANG) -O1 -fstack-protector-strong -S -emit-llvm $< -o smash_ex.stack-protect-strong.ll
+	$(CLANG) -S smash_ex.stack-protect-strong.ll
+	$(CLANG) -no-pie smash_ex.stack-protect-strong.ll -o $@
+
+
 
 .PHONY: clean
 clean:
