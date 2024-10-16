@@ -6,7 +6,7 @@ OPT := $(BINDIR)/opt
 lld := $(BINDIR)/lld
 
 
-CBINS := smash_ex.exe smash_ex.stack-protect.exe
+CBINS := smash_ex.exe smash_ex.stack-protect.exe smash_ex.stack-protect-strong.exe
 
 all: $(CBINS)
 

