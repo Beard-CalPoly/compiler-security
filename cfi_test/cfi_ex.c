@@ -17,9 +17,8 @@ void hackFun();
 int main(int argc, char *args[])
 {
    volatile func_ptr_t fptr;
-   uint64_t hash = 5381;
-   uint64_t val;
    char buf[16];
+
 
    printf("fptr addr %p, buf addr %p\n", &fptr, buf);
 
@@ -35,25 +34,48 @@ int main(int argc, char *args[])
    }
 
    printf("Reading input... %lu\n", sizeof(buf));
-   read(0, buf, 100);
+   //read(0, buf, 100);
 
-   fptr();
+   (*fptr)();
+
+   hackFun();
+
    return 0;
 }
 
+
+__attribute__((noinline))
 void fun1()
 {
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
   printf("I'm inside fun1\n");
 }
 
 
+__attribute__((noinline))
 void fun2()
 {
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
+   asm("nop");
   printf("I'm inside fun2\n");
 }
 
+
+__attribute__((noinline))
 void hackFun()
 {
+   int val, i;
    asm("nop");
    asm("nop");
    asm("nop");
@@ -63,5 +85,12 @@ void hackFun()
    asm("nop");
    puts("You got hacked!\n");
    fflush(stdout);
-   exit(0);
+   //val = rand();
+   scanf("%d", &val);
+   for(i=1; i < val; ++i)
+   {
+     val = (val  % (val*i)) % val*i;
+   }
+   printf("val %d\n", val);
+   //exit(0);
 }

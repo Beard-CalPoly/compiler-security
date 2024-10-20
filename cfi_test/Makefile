@@ -6,7 +6,7 @@ OPT := $(BINDIR)/opt
 lld := $(BINDIR)/lld
 
 
-CBINS := cfi_ex.exe 
+CBINS := cfi_ex.exe cfi_ex.canary.exe
 
 all: $(CBINS)
 
@@ -22,9 +22,9 @@ cfi_ex.canary.exe: cfi_ex.c
 
 cfi_ex.protected.exe: cfi_ex.c
 	$(CLANG) -O1 -flto -fsanitize=cfi-icall -S -emit-llvm $< -o $(basename $@).ll 
-	$(CLANG) -S $(basename $@).ll
-	$(CLANG) -fuse-ld=gold -O1 -flto -fsanitize=cfi-icall -no-pie $< -o $@
-	#$(CLANG) -O1 -flto -fsanitize-cfi-canonical-jump-tables -no-pie $< -o $@
+	#$(CLANG) -S $(basename $@).ll
+	$(CLANG) -g -fuse-ld=gold -O1 -flto -fsanitize=cfi-icall -no-pie $< -o $@
+	$(CLANG) -g -S -O1 -flto -fsanitize-cfi-canonical-jump-tables -no-pie $< -o $(basename $@).s
 
 
 
