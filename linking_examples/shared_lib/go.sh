@@ -15,6 +15,7 @@ objdump -d assembled_nopie > assembled_nopie.dump
 $CLANG -S foo.c
 $CLANG -S main.c
 $CLANG foo.s main.s -o compiled_ver
+$CLANG -static foo.s main.s -o compiled_ver_static
 
 $CLANG -S -emit-llvm foo.c
 $CLANG -S -emit-llvm main.c
