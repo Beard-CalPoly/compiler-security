@@ -31,7 +31,7 @@ fun_addr = binary.symbols['hackFun']
 print(fun_addr)
 
 # Create an instance of the process to talk to
-io = gdb.debug('./smash_ex.exe')
+io = gdb.debug('./smash_ex.stack-protect.exe')
 
 # `continue` in the gdb window
 io.readlines(4)
