@@ -23,9 +23,9 @@ smash_ex.stack-protect.exe: smash_ex.c
 	$(CLANG) -no-pie smash_ex.stack-protect.ll -o $@
 
 smash_ex.stack-protect.pie.exe: smash_ex.c
-	$(CLANG) $(optlevel) -fstack-protector -S -emit-llvm $< -o smash_ex.stack-protect.ll
-	$(CLANG) -masm=intel  -S smash_ex.stack-protect.ll
-	$(CLANG) smash_ex.stack-protect.ll -o $@
+	$(CLANG) $(optlevel) -fstack-protector -S -emit-llvm $< -o smash_ex.stack-protect.pie.ll
+	$(CLANG) -masm=intel  -S smash_ex.stack-protect.pie.ll
+	$(CLANG) smash_ex.stack-protect.pie.ll -o $@
 
 
 .PHONY: clean
